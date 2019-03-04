@@ -1,6 +1,15 @@
 from bottle import run, route, view, get, post, request, static_file
 from itertools import count
 
+
+class User:
+    books_in_cart = []
+    name = None
+    
+    def __init__(self, name):
+        self.name = name
+    
+    
 class Book:
     _ids = count (0)
     name = "How the heck would I know"
@@ -32,6 +41,11 @@ books = [
     Book(name= "Tintin in America", cost= 25, stock= 7, photo= "https://images-na.ssl-images-amazon.com/images/I/912vIXwG23L.jpg")
 ]
 
+users = [
+    User("Moses")
+]
+
+loged_user = users[0]
 
 #Index page
 @route('/')
@@ -47,10 +61,19 @@ def store():
     return data
 
 #Cart updated page
-@route('/cart_updated', METHOD="POST")
+@route('/cart_updated/<book_id>')
 @view('cart_updated')
-def cart_updated():
-    pass
+def cart_updated(book_id):
+    book_id = int(book_id)
+    found_book = None
+    for book in books:
+        if book.id == book_id:
+            found_book = book
+            break
+    found_book.stock -= 1
+    data = dict(book = found_book)
+    loged_user.books_in_cart.append(found_book)
+    return data
 
 
 
