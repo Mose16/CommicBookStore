@@ -6,3 +6,6 @@ Ver 1.0:
 
 Ver 1.1:
   Create the store page.
+
+Ver 1.2:
+  Create cart updated page and add alot of python.
