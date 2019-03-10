@@ -60,6 +60,20 @@ def store():
     data = dict(books_list = books)
     return data
 
+#Sing-in
+@route('/sign_in')
+@view('sign_in')
+def sign_in():
+    data = dict(users_list = users)
+    return data
+
+#Sign_in_success
+@route('/sign_in_success')
+@view('sign_in_success')
+def sign_in_success():
+    pass
+
+
 #Cart updated page
 @route('/cart_updated/<book_id>')
 @view('cart_updated')
