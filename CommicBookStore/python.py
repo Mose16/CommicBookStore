@@ -20,14 +20,14 @@ class Book:
     description = "It seems no one cared enough to write a description."
     cost = "At least $0"
     stock = "Probably none"
-    photo = "Void"
+    photo = "nopicture.jpg"
     
     def __init__(self, 
                  name = "How the heck would I know",
                  description = "It seems no one cared enough to write a description.",
                  cost = "At least $0",
                  stock = "Probably none",
-                 photo = "Void"):
+                 photo = "nopicture.jpg"):
         self.id = next(self._ids)
         self.name = name
         self.description = description
@@ -41,7 +41,7 @@ books = [
     Book(name= "Tintin And The Picaros", cost= 25, stock= 5, photo= "TintinAndThePicaros.jpg"),
     Book(name= "Prisoners Of The Sun", cost= 23, stock= 11983, photo= "PrisonersOfTheSun.jpg"),
     Book(name= "The Seven Crystal Balls", cost= 50, stock= 2, photo= "TheSevenCrystalBalls.jpg"),
-    Book(name= "The Shooting Star", cost= 20, stock= 8, photo= "TheShootingStar.jpg"),
+    Book(name= "The Shooting Star", cost= 20, stock= 8),
     Book(name= "Tintin In The Congo", cost= 30, stock= 10, photo= "TintinInTheCongo.jpg")
 ]
 
@@ -74,6 +74,12 @@ def store():
     data = dict(books_list = books)
     return data
 
+#Sing-up
+@route('/sign_up')
+@view('sign_up')
+def sign_up():
+    pass
+
 #Sing-in
 @route('/sign_in')
 @view('sign_in')
@@ -92,12 +98,6 @@ def sign_in_success():
                 loged_user = found_user
                 return dict(user = loged_user)
         
-
-    
-    
-    
-
-"""
 #Sign_up_success
 @route('/sign_up_success', method = "POST")
 @view('sign_up_success')
@@ -105,7 +105,8 @@ def sign_up_success():
     name = request.forms.get("name")
     password = request.forms.get("password")
     
-    users.append(User(name, password))"""
+    users.append(User(name, password))
+    return dict(user = users[-1])
 
 #Cart page
 @route('/cart')
