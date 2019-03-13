@@ -1,0 +1,24 @@
+<!DOCTYPE.html>
+<html>
+	%include('Shared/header.html')
+	%include('Shared/navigation.html')
+	
+	<body>
+	
+		<div>
+			
+			%if user != None:
+				%if user.admin:
+					<h1>Ok</h1>
+				%else:
+					<h1>Not ok {{user.name}}</h1>
+				%end
+			%else:
+				<h1>Log in</h1>
+			%end
+			
+		</div>
+		
+	</body>
+	
+</html>

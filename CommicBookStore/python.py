@@ -7,11 +7,13 @@ class User:
     books_in_cart = []
     name = None
     password = None
+    admin = None
     
-    def __init__(self, name, password):
+    def __init__(self, name, password, admin = False):
         self.id = next(self._ids)
         self.name = name
         self.password = password
+        self.admin = admin
     
     
 class Book:
@@ -46,11 +48,15 @@ books = [
 ]
 
 users = [
-    User("Moses", "Lel"),
-    User("Jeremey", "PooBumy69")
+    User("Void", "Void", admin = False),
+    User("Moses", "Lel", admin = True),
+    User("Jeremey", "PooBumy69"),
+    User("Tom", "PooBumy69+2")
 ]
 
 loged_user = users[0]
+
+
 
 
 #Images
@@ -66,6 +72,8 @@ def upload_image(filename):
 @view('index')
 def index():
     pass
+
+
 
 #Store page
 @route('/store')
@@ -96,6 +104,7 @@ def sign_in_success():
             if request.forms.get("password") == u.password:
                 found_user = u
                 loged_user = found_user
+                print(loged_user.name)
                 return dict(user = loged_user)
         
 #Sign_up_success
@@ -127,6 +136,14 @@ def cart_updated(book_id):
     found_book.stock -= 1
     loged_user.books_in_cart.append(found_book)
     return dict(book = found_book)
+
+
+#Admin page
+@route('/admin')
+@view('admin')
+def admin():
+    print(loged_user.name)
+    return dict(user = loged_user)
 
 
 
