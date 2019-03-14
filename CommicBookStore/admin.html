@@ -9,7 +9,29 @@
 			
 			%if user != None:
 				%if user.admin:
-					<h1>Ok</h1>
+					<h2 class="header" style="text-align:center">Comic Books:</h2>
+					%for book in books_list:
+						<div class="card horizontal" style="width:35%; float:left; margin-left: 10%">
+							<div class="card-image">
+								<img src="/pictures/{{book.photo}}" alt="Nope" style="height:40%">
+							</div>
+							<div class="card-stacked">
+								<div class="card-content">
+									<h4>{{book.name}}</h4>
+									<p></br>{{book.description}}</p>
+								</div>
+								<div class="card-action">
+									%if book.stock > 0:
+										<a href="cart_updated/{{book.id}}" class="btn-floating btn-large waves-effect waves-light blue" style="float:left"><i class="material-icons" >add</i></a>
+									%else:
+										<a class="btn-floating btn-large waves-effect waves-light red" style="float:left"><i class="material-icons" >error</i></a>
+									%end
+										<p style="float:left; margin-left: 10%">Cost: ${{book.cost}}</p>
+										<p style="float:left; margin-left: 10%">Stock: {{book.stock}}</p>	
+								</div>
+							</div>
+						</div>
+					%end
 				%else:
 					<h1>Not ok {{user.name}}</h1>
 				%end

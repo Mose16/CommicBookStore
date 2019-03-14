@@ -54,7 +54,10 @@ users = [
     User("Tom", "PooBumy69+2")
 ]
 
-loged_user = users[0]
+logged_user = users[0]
+def set_user(user):
+    global logged_user
+    logged_user = user #users[users.index(user)]
 
 
 
@@ -99,13 +102,15 @@ def sign_in():
 @view('sign_in_success')
 def sign_in_success():
     found_user = None
+    print('hell')
     for u in users:
         if request.forms.get("name") == u.name:
             if request.forms.get("password") == u.password:
                 found_user = u
-                loged_user = found_user
-                print(loged_user.name)
-                return dict(user = loged_user)
+                set_user(found_user)
+                logged_user = found_user
+                return dict(user = logged_user)
+    return
         
 #Sign_up_success
 @route('/sign_up_success', method = "POST")
@@ -115,13 +120,14 @@ def sign_up_success():
     password = request.forms.get("password")
     
     users.append(User(name, password))
-    return dict(user = users[-1])
+    set_user(users[-1])
+    return dict(user = logged_user)
 
 #Cart page
 @route('/cart')
 @view('cart')
 def cart():
-    return dict(cart = loged_user.books_in_cart)
+    return dict(cart = logged_user.books_in_cart)
 
 #Cart updated page
 @route('/cart_updated/<book_id>')
@@ -134,7 +140,7 @@ def cart_updated(book_id):
             found_book = book
             break
     found_book.stock -= 1
-    loged_user.books_in_cart.append(found_book)
+    logged_user.books_in_cart.append(found_book)
     return dict(book = found_book)
 
 
@@ -142,8 +148,7 @@ def cart_updated(book_id):
 @route('/admin')
 @view('admin')
 def admin():
-    print(loged_user.name)
-    return dict(user = loged_user)
+    return dict(user = logged_user), dict(books_list = books)
 
 
 
