@@ -1,0 +1,6 @@
+def indexPage(on, two):
+	pass
+class index():
+
+name = "Moses"
+oompaLoompa = ["lol", "hi"]
