@@ -5,6 +5,7 @@ file = open("python.txt", "r")
 xPass = True
 xAnd = True
 xQuotes = False
+xConditionals = True
 
 
 
@@ -28,9 +29,9 @@ def addPass(line):
         return line
     
     if line.find("()") == -1:
-        pos = line.find("(") + 1
-        line = line[:pos] + "Passing variables: " + line[pos:]
-    
+        if line.find("(") != -1:
+            pos = line.find("(") + 1
+            line = line[:pos] + "Passing variables: " + line[pos:]
     return line 
 
 def repAnd(line):
@@ -52,16 +53,19 @@ def wordRep(line):
         if word[:3] == " = ":
             if line.find(word) != -1:
                 pos = line.find(word)
-                             
-                if line.rfind(" ", 0, pos) != -1:
-                    start = line.rfind(" ", 0, pos)
-                else:
-                    start = 0
-                print(start)
-                line = line[:start] + PSEUDO[word] + line[start:pos] + "' to: " + line[pos + len(word):]
-    
-        if word == "def " or word == "class " or word == "def __init__":
+                spaces = len(line) - len(line.lstrip())
+                line = (" " * spaces) + line[:spaces] + PSEUDO[word] + line[spaces:pos] + "' to: " + line[pos + len(word):]
+        elif word == "def " or word == "class " or word == "def __init__":
             if line.find(word) != -1:
+                ###Add to arrays###
+                if word == "class ":
+                    classes.append(line[6: min(line.find("(") if not line.find("(") == -1 else 999, line.find(":") if not line.find(":") == -1 else 999)])
+                    classes[-1] = classes[-1].strip()
+                if word == "def ":
+                    functions.append(line[4: min(line.find("(") if not line.find("(") == -1 else 999, line.find(":") if not line.find(":") == -1 else 999)])   
+                    functions[-1] = functions[-1].strip()
+                
+                ###Replace words###                
                 pos = line.find(word)
                 line = line[:pos] + PSEUDO[word] + line[pos + len(word):]
                 
@@ -90,7 +94,14 @@ PSEUDO = {
     "class ":"Define a class called ",
     " = ":"Set variable '",
     "pass":"Do nothing ",
-    "def __init__":"Define object constructor function"
+    "def __init__":"Define object constructor function",
+    "==":" equal to ",
+    "<":" less than ",
+    ">":" greater than ",
+    
+    "<=":" less than or equal to ",
+    ">=":" greater than or equal to ",
+    "!=":" not equal to ",    
 }
 
 WORDS = [
@@ -98,8 +109,15 @@ WORDS = [
     "def ",
     "class ",
     " = ",
-    "pass"    
+    "pass",
+    "==",
+    "<=",
+    ">=",
+    "!="
 ]
+
+functions = []
+classes = []
 
 
 
@@ -108,12 +126,11 @@ WORDS = [
 ###-------Main Code-------###
 lines = readFileLines(file)
 newFile = ""
-for line in lines:
-    line = wordRep(line)
-    
+for line in lines:    
     #Conditionals
     if xPass:
         line = addPass(line)
+    line = wordRep(line)
     if xAnd:
         line = repAnd(line)
     if xQuotes:
@@ -122,6 +139,7 @@ for line in lines:
     newFile += line
 
 print(newFile)
+print(classes, functions)
 
 
 

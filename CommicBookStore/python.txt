@@ -8,11 +8,12 @@ class index():
 name = "Moses"
 oompaLoompa = ["lol", "hi", "hello"]
 
-    
-def __init__(self, name = "How the heck would I know", description = "It seems no one cared enough to write a description.", cost = "At least $0", stock = "Probably none", photo = "nopicture.jpg"):
-	self.id = next(self._ids)
-	self.name = name
-	self.description = description
-	self.cost = cost
-	self.stock = stock
-	self.photo = photo
+
+class User:
+	def __init__(self, name = "How the heck would I know", description = "It seems no one cared enough to write a description.", cost = "At least $0", stock = "Probably none", photo = "nopicture.jpg"):
+		self.id = next(self._ids)
+		self.name = name
+		self.description = description
+		self.cost = cost
+		self.stock = stock
+		self.photo = photo
