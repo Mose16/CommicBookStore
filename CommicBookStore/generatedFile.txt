@@ -1,0 +1,104 @@
+Task 0 : Explain what you are doing/ going to accomplish 
+Make a store page that allows users to add books to cart after browsing
+
+Task 1: Sketch interface design 
+ 
+Task 2: Identify any classes required 
+Book – An object for each book holding its cost, description, name, stock and photo.
+
+
+Task 3: Identify information to be displayed 
+A tile for each book will be displayed on the page displaying its image, name, description, stock and cost
+
+
+Task 4: Identify user inputs 
+Simply clicking on the + icon will add the book to the cart, no other inputs needed
+
+
+Task 5: Identify any constants or existing data if required 
+The data of each book
+
+Task 6: Identify indexed data structures  
+One that holds each book object
+
+Task 7: Determine what calculations are necessary 
+Stock – 1 for each book added to cart
+
+Task 8: Develop a modular structure for your program 
+
+from bottle import run, route, view, get, post, request and static_file
+from itertools import count
+Define a class called Book:
+        Set variable '_ids' to count (0)
+        Set variable 'name' to "How the heck would I know"
+        Set variable 'description' to "It seems no one cared enough to write a description."
+        Set variable 'cost' to "At least $0"
+        Set variable 'stock' to "Probably none"
+        Set variable 'photo' to "Void"
+    
+    Define object constructor function(Passing parameters: self and 
+                                  Set variable 'name' to "How the heck would I know",
+    Set variable 'description' to "It seems no one cared enough to write a description." by default,
+                                  Set variable 'cost' to "At least $0" by default,
+                                  Set variable 'stock' to "Probably none" by default,
+                                  Set variable 'photo' to "Void" by default):
+                Set variable 'self.id' to next(self._ids)
+                Set variable 'self.name' to name
+                Set variable 'self.description' to description
+                Set variable 'self.cost' to cost
+                Set variable 'self.stock' to stock
+                Set variable 'self.photo' to photo
+        
+    
+Set variable 'books' to [
+    an iteration of class Book(Passing parameters: name= "Tintin in America", cost= 25, stock= 7 and photo= "https://images-na.ssl-images-amazon.com/images/I/912vIXwG23L.jpg"),
+    an iteration of class Book(Passing parameters: name= "Tintin and the Picaros", cost= 25, stock= 5 and photo= "https://images-na.ssl-images-amazon.com/images/I/61%2Bp-97QRIL.jpg"),
+    an iteration of class Book(Passing parameters: name= "Tintin in America", cost= 25, stock= 7 and photo= "https://images-na.ssl-images-amazon.com/images/I/912vIXwG23L.jpg"),
+    an iteration of class Book(Passing parameters: name= "Tintin in America", cost= 25, stock= 7 and photo= "https://images-na.ssl-images-amazon.com/images/I/912vIXwG23L.jpg"),
+    an iteration of class Book(Passing parameters: name= "Tintin in America", cost= 25, stock= 7 and photo= "https://images-na.ssl-images-amazon.com/images/I/912vIXwG23L.jpg"),
+    an iteration of class Book(Passing parameters: name= "Tintin in America", cost= 25, stock= 7 and photo= "https://images-na.ssl-images-amazon.com/images/I/912vIXwG23L.jpg")
+]
+
+#Index page
+@route('/')
+@view('index')
+Define a function called index():
+    pass
+
+#Store page
+@route('/store')
+@view('store')
+Define a function called store():
+        Set variable 'data' to dict(books_list = books)
+    return data
+
+#Cart updated page
+@route('/cart_updated/ is less than book_id is greater than ')
+@view('cart_updated')
+Define a function called cart_updated(Passing parameters: book_id):
+        Set variable 'book_id' to int(book_id)
+        Set variable 'found_book' to None
+    	for book in books:
+      	  if book.id  is equal to  book_id:
+              Set variable 'found_book' to book
+              break
+    	found_book.stock -= 1
+        Set variable 'data' to dict(book = found_book)
+    	loged_user.books_in_cart.append(found_book)
+    	return data
+
+
+
+run(host='0.0.0.0', Set variable 'port' to 6969, reloader = True and debug = True)
+
+Task 9: Define the functions identified 
+
+Task 10: Address any relevant implications such as usability, 
+Functionality, legal/ethical requirements. 
+
+Task 11: Document test cases for testing the program 
+
+Task 12: Refine the plan 
+
+Task 13: Document testing 
+
