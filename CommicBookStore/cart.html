@@ -1,0 +1,25 @@
+<!DOCTYPE.html>
+<html>
+	%include('Shared/header.html')
+	%include('Shared/navigation.html')
+	
+	<body>
+		<div class="col s12 m7">
+			<h2 class="header" style="text-align:center">Comic Books:</h2>
+			%for book in cart:
+			<div class="card horizontal" style="width:35%; float:left; margin-left: 10%">
+				<div class="card-image">
+					<img src="/pictures/{{book.photo}}" alt="Nope" style="height:40%">
+				</div>
+				<div class="card-stacked">
+					<div class="card-content">
+						<h4>{{book.name}}</h4>
+						<p></br>{{book.description}}</p>
+					</div>
+				</div>
+			</div>
+			%end
+		</div>
+	</body>
+	
+</html>
